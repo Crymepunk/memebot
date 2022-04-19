@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-from time import sleep
 from alive_progress import alive_bar
 from transformers import GPT2Tokenizer, TFGPT2LMHeadModel
-import tensorflow as tf
 
 def compute(length):
     # Encode the input

@@ -1,0 +1,3 @@
+tensorflow >= 2.8.0
+transformers >= 4.18.0
+alive-progress >= 2.4.1
