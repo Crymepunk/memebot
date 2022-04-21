@@ -6,10 +6,9 @@ import argparse
 
 parse = argparse.ArgumentParser()
 
-parse.add_argument("--maxtokens", "-m", help="max tokens", type=int, default=0)
+parse.add_argument("--maxlength", "-m", help="max length of the output", type=int, default=0)
 parse.add_argument("--tts", "-t", help="enable tts", action="store_true")
-parse.add_argument("--input", "-i", type=str, help="input for memebot")
-parse.add_argument("--fast", action="store_true")
+parse.add_argument("--input", "-i", type=str, help="input for the memebot")
 
 ARG = parse.parse_args()
 
@@ -50,9 +49,9 @@ else:
     # If input argument is not given
     inp = input("Enter a sentence: ")
     # Max length of the input
-if ARG.maxtokens != 0:
+if ARG.maxlength != 0:
     # If max tokens argument is given
-    max_length = ARG.maxtokens
+    max_length = ARG.maxlength
 else:
     # If max tokens argument is not given
     if ARG.input:
