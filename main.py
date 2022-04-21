@@ -18,16 +18,16 @@ def compute(length):
     # Encode the input
     input_ids = tokenizer.encode(inp, return_tensors='tf')
     yield
-    print("Encoded the Input!")
+    print("Encoded the input")
     # Generate the output
     greedy_output = model.generate(input_ids, max_length=length * 10, temperature=0.7, repetition_penalty=1.2, top_k=0.0, top_p=0.0)
     yield
-    print("Generated the Output!")
+    print("Generated the output")
     # Decode the output into text
     global output
     output = tokenizer.decode(greedy_output[0], skip_special_tokens=True)
     yield
-    print("Decoded the Output!")
+    print("Decoded the output")
 
 # Load the model
 model = TFGPT2LMHeadModel.from_pretrained("gpt2")
@@ -44,24 +44,38 @@ if ARG.input == None:
 
 # Input for the model
 if ARG.input:
+    # If input argument is given
     inp = ARG.input
 else:
+    # If input argument is not given
     inp = input("Enter a sentence: ")
     # Max length of the input
 if ARG.maxtokens != 0:
+    # If max tokens argument is given
     max_length = ARG.maxtokens
 else:
+    # If max tokens argument is not given
     if ARG.input:
+        # If input argument is given
         max_length = ""
     else:
+        # If input argument is not given
         max_length = input("Max length of the input (Enter for default): ")
 if ARG.tts:
+    # If tts argument is given
     tts = True
 else:
+    # If tts argument is not given
     if ARG.input:
+        # If input argument is given
         tts = False
     else:
-        tts = input("Enable TTS? (True/False) ")
+        # If input argument is not given
+        tts = input("Enable TTS? (y/N): ")
+        if tts.lower() == "y" or tts.lower() == "yes":
+            tts = True
+        else:
+            tts = False
 
 while True:
     if max_length == "":
@@ -85,9 +99,9 @@ with alive_bar(3, title="Working...", stats=False) as bar:
 print("\n" + "-" * 50 + " Output " + "-" * 50 + "\n")
 # Print the output
 print(output)
+# Print divide line
+print("\n" + "-" * 108)
 if tts == True:
     engine.say(output)
     engine.runAndWait()
-# Print divide line
-print("\n" + "-" * 108)
 quit()
