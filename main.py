@@ -104,4 +104,4 @@ print("\n" + "-" * 108)
 if tts == True:
     engine.say(output)
     engine.runAndWait()
-quit()
+    engine.stop()
